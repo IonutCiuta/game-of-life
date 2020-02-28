@@ -10,7 +10,7 @@ public class GameOfLife extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent parent = FXMLLoader.load(getClass().getResource("gui.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("/gui.fxml"));
 
         primaryStage.setTitle("Conway's Game of Life");
         primaryStage.setScene(new Scene(parent));

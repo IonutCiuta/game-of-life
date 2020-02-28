@@ -3,7 +3,6 @@ package gof.gui;
 import gof.core.Board;
 import gof.core.Cell;
 import gof.core.DisplayDriver;
-import javafx.scene.Group;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

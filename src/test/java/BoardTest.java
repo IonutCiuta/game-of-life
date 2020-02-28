@@ -1,9 +1,9 @@
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
 import gof.core.Board;
 import gof.core.Cell;
+import org.junit.Test;
+
+import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public class BoardTest {
    
