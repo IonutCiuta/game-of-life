@@ -1,5 +1,7 @@
 package gof.core;
 
+import gof.gui.IBoard;
+
 public interface DisplayDriver {
-    void displayBoard(Board board);
+    void displayBoard(IBoard board);
 }

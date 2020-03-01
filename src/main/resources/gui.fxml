@@ -53,7 +53,21 @@
                                     <Label fx:id="countLabel" text="30%" />
                                  </children>
                               </HBox>
-                              <Slider fx:id="countSlider" onDragDetected="#onSlide" onDragDone="#onSlide" onDragDropped="#onSlide" onDragEntered="#onSlide" onDragExited="#onSlide" onDragOver="#onSlide" onMouseDragEntered="#onSlide" onMouseDragExited="#onSlide" onMouseDragOver="#onSlide" onMouseDragReleased="#onSlide" value="30.0" />
+                              <!--
+                              <Slider
+                                      fx:id="countSlider"
+                                      onDragDetected="#onSlide"
+                                      onDragDone="#onSlide"
+                                      onDragDropped="#onSlide"
+                                      onDragEntered="#onSlide"
+                                      onDragExited="#onSlide"
+                                      onDragOver="#onSlide"
+                                      onMouseDragEntered="#onSlide"
+                                      onMouseDragExited="#onSlide"
+                                      onMouseDragOver="#onSlide"
+                                      onMouseDragReleased="#onSlide"
+                                      value="30.0" />
+                              -->
                            </children>
                         </VBox>
                      </children>
@@ -128,12 +142,14 @@
                </children>
             </VBox>
             <BorderPane prefHeight="33.0" prefWidth="195.0">
+               <!--
                <center>
                   <Button fx:id="randomizeButton" mnemonicParsing="false" onAction="#onRandomize" text="Randomize" BorderPane.alignment="CENTER" />
                </center>
                <right>
                   <Button fx:id="clearButton" mnemonicParsing="false" onAction="#onClear" text="Clear" BorderPane.alignment="CENTER" />
                </right>
+               -->
                <top>
                   <Separator prefWidth="200.0" BorderPane.alignment="CENTER" />
                </top>
