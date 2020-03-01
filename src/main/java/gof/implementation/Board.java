@@ -15,7 +15,7 @@ public class Board implements IBoard {
     }
 
     @Override
-    public IBoard setup(int size) {
+    public void setup(int size) {
         this.grid = new Cell[size][size];
         this.height = this.width = grid.length;
         for (int i = 0; i < this.height; i++) {
@@ -23,7 +23,6 @@ public class Board implements IBoard {
                 this.grid[i][j] = new Cell();
             }
         }
-        return this;
     }
 
     // Neighbour configuration
