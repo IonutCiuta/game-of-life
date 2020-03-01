@@ -54,20 +54,19 @@ public class FileHandler {
         return new Board(g);        
     }
     
-    public static void saveToFile(Board board) {
+    public static void saveToFile(IBoard board) {
         File file = askForSaveFile();
         if (file == null) {
             return;
         }
         
         String output = ""; // string of numbers from board
-        Cell[][] g = board.getGrid();
-        for (int i = 0; i < g.length; i++) {
-            for (int j = 0; j < g[0].length; j++) {
-                output+= g[i][j].getState() ? 1 : 0;
+        for (int i = 0; i < board.getWitdh(); i++) {
+            for (int j = 0; j < board.getHeight(); j++) {
+                output += board.getState(i, j) ? 1 : 0;
             }
-            if (i != g.length-1){
-                output+="\n";
+            if (i != board.getHeight() - 1){
+                output += "\n";
             }
         }
 

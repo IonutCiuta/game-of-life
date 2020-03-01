@@ -5,6 +5,7 @@ import gof.core.Board;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import gof.core.Cell;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
@@ -51,7 +52,7 @@ public class Controller implements Initializable {
     @FXML
     private HBox rootBox;
 
-    private Board board;
+    private IBoard board;
 
     private JavaFXDisplayDriver display;
 
@@ -68,7 +69,9 @@ public class Controller implements Initializable {
         AnchorPane anchor = presetHandler.loadPresets(base);
         presetBox.getChildren().add(anchor);
 
-        createBoard(DEFAULT_SIZE, DEFAULT_PROB);
+        // Setup board
+        this.board = new Board();
+        this.board.setup(DEFAULT_SIZE);
         
         attachResizeListener();
     }
@@ -91,16 +94,16 @@ public class Controller implements Initializable {
         toggleButtons(true);
         loop.stop();
     }
-
-    @FXML
-    private void onClear(Event evt) {
-        createBoard(DEFAULT_SIZE, 0);
-    }
-
-    @FXML
-    private void onRandomize(Event evt) {
-        createBoard(DEFAULT_SIZE, (double) countSlider.getValue()/100);
-    }
+//
+//    @FXML
+//    private void onClear(Event evt) {
+//        createBoard(DEFAULT_SIZE, 0);
+//    }
+//
+//    @FXML
+//    private void onRandomize(Event evt) {
+//        createBoard(DEFAULT_SIZE, (double) countSlider.getValue()/100);
+//    }
     
     @FXML
     private void onPresetOpen(Event evt) {
@@ -123,19 +126,6 @@ public class Controller implements Initializable {
     @FXML
     private void onSave(Event evt) {
         FileHandler.saveToFile(board);
-    }
-
-
-    @FXML
-    private void onSlide(Event evt) {
-        countSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable,
-                    Number oldValue, Number newValue) {
-                countLabel.setText(newValue.intValue()+"%");
-                createBoard(DEFAULT_SIZE, (double) newValue.intValue()/100);
-            }
-        });
     }
 
 
@@ -175,25 +165,39 @@ public class Controller implements Initializable {
     }
     
     private void toggleButtons(boolean enable) {
-        countSlider.setDisable(!enable);
+//        countSlider.setDisable(!enable);
         presetBox.setDisable(!enable);
         openButton.setDisable(!enable);
         openPresetBtn.setDisable(!enable);
         saveButton.setDisable(!enable);
         runButton.setDisable(!enable);
-        clearButton.setDisable(!enable);
-        randomizeButton.setDisable(!enable);
+//        clearButton.setDisable(!enable);
+//        randomizeButton.setDisable(!enable);
 
         stopButton.setDisable(enable);
     }
 
-    private void createBoard(int size, double prob) {
-        board = new Board(size, size, prob);
-        createDisplay();
-    }
+//    // Uncomment to support randomized cells
+//    private void createBoard(int size, double probability) {
+//        board = new Board(new Cell[size][size]);
+//        for (int h = 0; h < size; h++){
+//            for (int w = 0; w < size; w++){
+//
+//                Cell newCell = new Cell();
+//
+//                if (Math.random() <= probability) {
+//                    newCell.setNewState(true);
+//                    newCell.updateState();
+//                }
+//
+//                board.getGrid()[h][w] = newCell;
+//            }
+//        }
+//        createDisplay();
+//    }
     
     private void createDisplay() {
-        display = new JavaFXDisplayDriver(board.getSize(), cellSizePx, board);
+        display = new JavaFXDisplayDriver(board.getWitdh(), cellSizePx, board);
 
         base.getChildren().clear();
         base.getChildren().add(new Group(display.getPane()));        

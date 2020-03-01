@@ -1,33 +1,24 @@
 package gof.core;
 
-public class Board {
+import gof.gui.IBoard;
+
+public class Board implements IBoard {
     private Cell[][] grid;
     private int height = 3;
     private int width = 3;
+
+    public Board() {}
 
     public Board(Cell[][] grid) {
         this.grid = grid;
         height = width = grid.length;
     }
 
-    public Board(int height, int width, double probability) {
-        this.height = height;
-        this.width = width;
-        this.grid = new Cell[height][width];
-        
-        for (int h = 0; h < height; h++){
-            for (int w = 0; w < width; w++){
-
-                Cell newCell = new Cell();
-
-                if (Math.random() <= probability) {
-                    newCell.setNewState(true);
-                    newCell.updateState();
-                }
-
-                this.grid[h][w] = newCell;
-            }
-        }
+    @Override
+    public IBoard setup(int size) {
+        this.grid = new Cell[size][size];
+        this.height = this.width = grid.length;
+        return this;
     }
 
     // Neighbour configuration
@@ -100,6 +91,7 @@ public class Board {
         return this.grid[row][col].getState();
     }
 
+    @Override
     public void update() {
         prepare();
         commit();
@@ -129,8 +121,8 @@ public class Board {
     }
 
     private void commit() {
-        for (int h=0; h < this.height; h++){
-            for (int w=0; w < this.width; w++){
+        for (int h = 0; h < this.height; h++){
+            for (int w = 0; w < this.width; w++){
                 this.grid[h][w].updateState();
             }
         }
@@ -142,5 +134,20 @@ public class Board {
 
     public int getSize() {
         return this.width;
+    }
+
+    @Override
+    public int getWitdh() {
+        return this.width;
+    }
+
+    @Override
+    public int getHeight() {
+        return this.height;
+    }
+
+    @Override
+    public boolean getState(int x, int y) {
+        return this.grid[x][y].getState();
     }
 }
