@@ -1,16 +1,11 @@
 package gof.gui;
 
-import gof.core.Board;
-import gof.core.Cell;
+import gof.implementation.Board;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextArea;

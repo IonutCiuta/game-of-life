@@ -1,4 +1,4 @@
-package gof.gui;
+package gof.core;
 
 public interface IBoard {
     int getWidth();
