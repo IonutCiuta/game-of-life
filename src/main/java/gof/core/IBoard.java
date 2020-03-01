@@ -7,7 +7,7 @@ public interface IBoard {
 
     boolean getState(int x, int y);
 
-    IBoard setup(int size);
+    void setup(int size);
 
     void update();
 }
