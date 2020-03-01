@@ -2,8 +2,8 @@ package gof.core;
 
 public class Board {
     private Cell[][] grid;
-    private int height=3; //bottom right pos: grid[height-1][width-1]
-    private int width=3;
+    private int height = 3;
+    private int width = 3;
 
     public Board(Cell[][] grid) {
         this.grid = grid;
@@ -16,17 +16,21 @@ public class Board {
      * @param p probability that Cell is alive at start
      */
     public Board(int height, int width, double p) {
-        this.height=height;
+        this.height = height;
         this.width = width;
-        grid = new Cell[height][width];
+        this.grid = new Cell[height][width];
         
-        for (int h=0; h<grid.length; h++){
-            for (int w=0; w<grid[h].length; w++){
-                grid[h][w] = new Cell();
-                if (Math.random()<=p){
-                    grid[h][w].setNewState(true);
-                    grid[h][w].updateState();
+        for (int h = 0; h < height; h++){
+            for (int w = 0; w < width; w++){
+
+                Cell newCell = new Cell();
+
+                if (Math.random() <= p) {
+                    newCell.setNewState(true);
+                    newCell.updateState();
                 }
+
+                this.grid[h][w] = newCell;
             }
         }
     }
@@ -40,7 +44,7 @@ public class Board {
     }
 
     public int neighboursCountAt(int row, int col) {
-        int sum=0;
+        int sum = 0;
         // Positions numbered as phone dial
         if (row != 0 && col != 0){    //1
             if(isAlive(row-1,col-1)){
