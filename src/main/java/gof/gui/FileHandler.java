@@ -6,11 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import gof.core.IBoard;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
-import gof.core.Board;
-import gof.core.Cell;
+import gof.implementation.Board;
+import gof.implementation.Cell;
 
 public class FileHandler {
 

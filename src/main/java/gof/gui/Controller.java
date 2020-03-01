@@ -1,6 +1,7 @@
 package gof.gui;
 
-import gof.core.Board;
+import gof.implementation.Board;
+import gof.core.IBoard;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;

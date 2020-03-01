@@ -1,6 +1,6 @@
-package gof.core;
+package gof.implementation;
 
-import gof.gui.IBoard;
+import gof.core.IBoard;
 
 public class Board implements IBoard {
     private Cell[][] grid;

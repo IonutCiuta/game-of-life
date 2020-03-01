@@ -1,8 +1,8 @@
-import gof.core.Board;
-import gof.core.Cell;
+import gof.implementation.Board;
+import gof.implementation.Cell;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.*;
 import static org.junit.Assert.assertSame;
 
 public class BoardTest {
@@ -33,16 +33,16 @@ public class BoardTest {
 
         Board b = new Board(cells);
 
-        assertEquals(true, b.isCellAlive(0, 0));
-        assertEquals(false, b.isCellAlive(1, 1));
+        assertTrue(b.isCellAlive(0, 0));
+        assertFalse(b.isCellAlive(1, 1));
 
         b.update();
 
-        assertEquals(false, b.isCellAlive(0, 0));
-        assertEquals(false, b.isCellAlive(2, 2));
-        assertEquals(false, b.isCellAlive(2, 0));
-        assertEquals(false, b.isCellAlive(0, 2));
-        assertEquals(false, b.isCellAlive(1, 1));
+        assertFalse(b.isCellAlive(0, 0));
+        assertFalse(b.isCellAlive(2, 2));
+        assertFalse(b.isCellAlive(2, 0));
+        assertFalse(b.isCellAlive(0, 2));
+        assertFalse(b.isCellAlive(1, 1));
     }
 
     @Test
@@ -71,13 +71,13 @@ public class BoardTest {
         Board b = new Board(cells);
         
         b.update();
-        
-        assertEquals(true, b.isCellAlive(0, 0));
-        assertEquals(true, b.isCellAlive(0, 2));
-        assertEquals(true, b.isCellAlive(1, 0));
-        assertEquals(true, b.isCellAlive(1, 2));
-        
-        assertEquals(false, b.isCellAlive(0, 1));
-        assertEquals(false, b.isCellAlive(1, 1));
+
+        assertTrue(b.isCellAlive(0, 0));
+        assertTrue(b.isCellAlive(0, 2));
+        assertTrue(b.isCellAlive(1, 0));
+        assertTrue(b.isCellAlive(1, 2));
+
+        assertFalse(b.isCellAlive(0, 1));
+        assertFalse(b.isCellAlive(1, 1));
     }
 }

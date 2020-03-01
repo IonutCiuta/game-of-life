@@ -2,7 +2,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import gof.core.Cell;
+import gof.implementation.Cell;
 
 public class CellTest {
 
@@ -12,13 +12,14 @@ public class CellTest {
 
         c.setNewState(true);
         c.updateState();
-        assertEquals(true, c.getState());
+        assertTrue(c.getState());
     }
 
+    @Test
     public void testConstructor() {
         Cell c = new Cell(true);
 
-        assertEquals(true, c.getState());
+        assertTrue(c.getState());
     }
 
 }

@@ -1,4 +1,4 @@
-package gof.core;
+package gof.implementation;
 
 public class Cell {
     private boolean state = false;
