@@ -18,6 +18,11 @@ public class Board implements IBoard {
     public IBoard setup(int size) {
         this.grid = new Cell[size][size];
         this.height = this.width = grid.length;
+        for (int i = 0; i < this.height; i++) {
+            for (int j = 0; j < this.width; j++) {
+                this.grid[i][j] = new Cell();
+            }
+        }
         return this;
     }
 

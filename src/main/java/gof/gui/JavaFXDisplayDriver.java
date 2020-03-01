@@ -19,9 +19,6 @@ public class JavaFXDisplayDriver implements DisplayDriver {
                 Color c = board.getState(i, j) ? Color.STEELBLUE : Color.WHITE;
                 Rectangle rect = new Rectangle(cellSizePx, cellSizePx, c);
                 tilePane.getChildren().add(rect);
-
-                // Uncomment if you want to add listeners per cell
-                // attachListeners(rect, g[i][j]);
             }
         }
     }
@@ -43,17 +40,4 @@ public class JavaFXDisplayDriver implements DisplayDriver {
     private int boardToPaneCoords(int i, int j) {
         return i * sz + j;
     }
-
-    // Uncomment for adding listeners per cell
-    /*
-    private void attachListeners(Rectangle r, Cell c) {
-        r.setOnMousePressed(e -> { r.setFill(Color.GRAY); });
-
-        r.setOnMouseClicked(e -> {
-            r.setFill(c.getState() ? Color.WHITE : Color.STEELBLUE);
-            c.setNewState(!c.getState());
-            c.updateState();
-        });
-    }
-    */
 }
