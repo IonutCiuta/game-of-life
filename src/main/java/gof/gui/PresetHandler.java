@@ -93,7 +93,7 @@ public class PresetHandler {
             } else {
                 File f = new File("Presets/nopreview.png");
                 if(f.exists() && !f.isDirectory()) { 
-                    Image noprevImg = new Image("file:Presets/nopreview.png"); //new Image("Presets/nopreview.png");
+                    Image noprevImg = new Image("file:Presets/nopreview.png");
                     ImageView noprev = new ImageView();
                     noprev.setImage(noprevImg);
                     box.getChildren().add(noprev);
