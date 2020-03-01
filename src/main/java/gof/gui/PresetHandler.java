@@ -1,10 +1,10 @@
 package gof.gui;
 
-import gof.implementation.Board;
-
 import java.io.File;
 import java.io.FileFilter;
 
+import gof.core.IBoard;
+import gof.core.IBoardProvider;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
@@ -42,7 +42,7 @@ public class PresetHandler {
         }
 
         Pagination presetsPagination = new Pagination(presets.length, 0);
-        //pagination.setStyle("-fx-border-color:red;");
+
         presetsPagination.setPageFactory(new Callback<Integer, Node>() {
             @Override
             public Node call(Integer pageIndex) {
@@ -64,9 +64,9 @@ public class PresetHandler {
         return anchor;
     }
     
-    public Board openCurrentPreset(int defaultSize) {
-        File selectedFile = new File ("Presets/"+currentPreset.toLowerCase()+".gofb");   
-        return FileHandler.loadFromFile(selectedFile, defaultSize);
+    public IBoard openCurrentPreset(int defaultSize, IBoardProvider boardProvider) {
+        File selectedFile = new File ("Presets/" + currentPreset.toLowerCase() + ".gofb");
+        return FileHandler.loadFromFile(selectedFile, defaultSize, boardProvider);
     }
     
     private VBox createPresetPage(int pageIndex, FlowPane base) {

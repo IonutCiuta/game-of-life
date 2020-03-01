@@ -7,52 +7,37 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import gof.core.IBoard;
+import gof.core.IBoardProvider;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
-import gof.implementation.Board;
-import gof.implementation.Cell;
 
 public class FileHandler {
 
-    public static Board openFromFile(int defaultSize) {
+    public static IBoard openFromFile(int defaultSize, IBoardProvider boardProvider) {
         File file = askForOpenFile();
         if (file == null) {
             return null;
         }
         
-        return loadFromFile(file, defaultSize);
+        return loadFromFile(file, defaultSize, boardProvider);
     }
     
-    public static Board loadFromFile(File file, int defaultSize) {
-        String input = "";
-        int sz = defaultSize;
-        try (Scanner s = new Scanner(file)) {
-            while (s.hasNextLine()) {
-                String line = s.nextLine().replaceAll("\\s+","");
-                input += line;
-                
-                sz = line.length();
+    public static IBoard loadFromFile(File file, int defaultSize, IBoardProvider boardProvider) {
+        StringBuilder input = new StringBuilder();
+        int size = defaultSize;
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine().replaceAll("\\s+","");
+                input.append(line);
+                size = line.length();
             }
         } catch (FileNotFoundException e) {
-            // should never happen since we return on null file
-            // so if we end up here it's something really bad 
-            // and so we let it blow up to runtime
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't open file to create board!", e);
         }
 
-        Cell[][] g = new Cell[sz][sz];
-
-        int pos = 0;
-        for (int i = 0; i < sz; i++) {
-            for (int j = 0; j < sz; j++) {
-                boolean state = (input.charAt(pos) =='1');
-                g[i][j] = new Cell(state);
-                pos++;
-            }
-        }
-
-        return new Board(g);        
+        return boardProvider.getBoardFromString(input.toString(), size);
     }
     
     public static void saveToFile(IBoard board) {
@@ -73,7 +58,6 @@ public class FileHandler {
 
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(output);
-            fileWriter.close();
         } catch (IOException ex) {
             System.out.println(ex);
         }

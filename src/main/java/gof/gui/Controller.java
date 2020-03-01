@@ -2,7 +2,6 @@ package gof.gui;
 
 import gof.core.IBoard;
 import gof.core.IBoardProvider;
-import gof.implementation.Board;
 import gof.implementation.BoardProvider;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -97,13 +96,13 @@ public class Controller implements Initializable {
     
     @FXML
     private void onPresetOpen(Event evt) {
-        board = presetHandler.openCurrentPreset(DEFAULT_SIZE);
+        board = presetHandler.openCurrentPreset(DEFAULT_SIZE, boardProvider);
         createDisplay();
     }
 
     @FXML
     private void onOpen(Event evt) {
-        Board newBoard = FileHandler.openFromFile(DEFAULT_SIZE);
+        IBoard newBoard = FileHandler.openFromFile(DEFAULT_SIZE, boardProvider);
         if (newBoard != null) {
             board = newBoard;
             createDisplay();
