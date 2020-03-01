@@ -47,11 +47,11 @@ public class FileHandler {
         }
         
         String output = ""; // string of numbers from board
-        for (int i = 0; i < board.getWidth(); i++) {
-            for (int j = 0; j < board.getHeight(); j++) {
+        for (int i = 0; i < board.getSize(); i++) {
+            for (int j = 0; j < board.getSize(); j++) {
                 output += board.getState(i, j) ? 1 : 0;
             }
-            if (i != board.getHeight() - 1){
+            if (i != board.getSize() - 1){
                 output += "\n";
             }
         }

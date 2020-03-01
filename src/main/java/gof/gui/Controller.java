@@ -125,7 +125,7 @@ public class Controller implements Initializable {
     }
     
     private void createDisplay() {
-        display = new JavaFXDisplayDriver(board.getWidth(), cellSizePx, board);
+        display = new JavaFXDisplayDriver(board.getSize(), cellSizePx, board);
 
         base.getChildren().clear();
         base.getChildren().add(new Group(display.getPane()));        
