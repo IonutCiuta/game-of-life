@@ -4,22 +4,22 @@ import gof.core.IBoard;
 
 public class Board implements IBoard {
     private Cell[][] grid;
-    private int height = 3;
-    private int width = 3;
+    private int size = 3;
 
     public Board() {}
 
     public Board(Cell[][] grid) {
         this.grid = grid;
-        height = width = grid.length;
+        size = grid.length;
     }
 
     @Override
     public void setup(int size) {
         this.grid = new Cell[size][size];
-        this.height = this.width = grid.length;
-        for (int i = 0; i < this.height; i++) {
-            for (int j = 0; j < this.width; j++) {
+        this.size = grid.length;
+
+        for (int i = 0; i < this.size; i++) {
+            for (int j = 0; j < this.size; j++) {
                 this.grid[i][j] = new Cell();
             }
         }
@@ -47,7 +47,7 @@ public class Board implements IBoard {
         }
 
         // Top right neighbour
-        if (row != 0 && col != width - 1) {
+        if (row != 0 && col != size - 1) {
             if(isCellAlive(row - 1,col + 1)) {
                 sum++;
             }
@@ -61,28 +61,28 @@ public class Board implements IBoard {
         }
 
         // Right neighbour
-        if (col != width - 1) {
+        if (col != size - 1) {
             if(isCellAlive(row,col + 1)) {
                 sum++;
             }
         }
 
         // Bottom left neighbour
-        if (row != height - 1 && col != 0){
+        if (row != size - 1 && col != 0){
             if(isCellAlive(row + 1,col - 1)) {
                 sum++;
             }
         }
 
         // Bottom neighbour
-        if (row != height - 1){
+        if (row != size - 1){
             if(isCellAlive(row + 1, col)) {
                 sum++;
             }
         }
 
         // Bottom right neighbour
-        if (row != height - 1 && col != width - 1) {
+        if (row != size - 1 && col != size - 1) {
             if(isCellAlive(row + 1,col + 1)) {
                 sum++;
             }
@@ -102,8 +102,8 @@ public class Board implements IBoard {
     }
 
     private void prepare() {
-        for (int h = 0; h < this.height; h++){
-            for (int w = 0; w < this.width; w++){
+        for (int h = 0; h < this.size; h++){
+            for (int w = 0; w < this.size; w++){
 
                 int neighbours = countNeighbours(h, w);
 
@@ -125,8 +125,8 @@ public class Board implements IBoard {
     }
 
     private void commit() {
-        for (int h = 0; h < this.height; h++){
-            for (int w = 0; w < this.width; w++){
+        for (int h = 0; h < this.size; h++){
+            for (int w = 0; w < this.size; w++){
                 this.grid[h][w].updateState();
             }
         }
@@ -136,18 +136,9 @@ public class Board implements IBoard {
         return this.grid;
     }
 
+    @Override
     public int getSize() {
-        return this.width;
-    }
-
-    @Override
-    public int getWidth() {
-        return this.width;
-    }
-
-    @Override
-    public int getHeight() {
-        return this.height;
+        return this.size;
     }
 
     @Override

@@ -26,8 +26,8 @@ public class JavaFXDisplayDriver implements DisplayDriver {
 
     @Override
     public void displayBoard(IBoard board) {
-        for (int i = 0; i < board.getHeight(); i++) {
-            for (int j = 0; j < board.getWidth(); j++) {
+        for (int i = 0; i < board.getSize(); i++) {
+            for (int j = 0; j < board.getSize(); j++) {
                 Rectangle r = (Rectangle) tilePane.getChildren().get(boardToPaneCoords(i, j));
                 r.setFill(board.getState(i, j) ? Color.STEELBLUE : Color.WHITE);
             }
