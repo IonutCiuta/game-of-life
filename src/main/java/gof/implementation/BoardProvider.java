@@ -11,4 +11,20 @@ public class BoardProvider implements IBoardProvider {
         board.setup(size);
         return board;
     }
+
+    @Override
+    public IBoard getBoardFromString(String board, int size) {
+        Cell[][] cells = new Cell[size][size];
+        int pos = 0;
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                boolean state = (board.charAt(pos) == '1');
+                cells[i][j] = new Cell(state);
+                pos++;
+            }
+        }
+
+        return new Board(cells);
+    }
 }
