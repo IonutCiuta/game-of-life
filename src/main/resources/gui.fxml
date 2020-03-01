@@ -118,23 +118,37 @@
                   </BorderPane>
                </children>
             </VBox>
-            <BorderPane prefHeight="39.0" prefWidth="195.0">
-               <left>
-                <Button fx:id="runButton" mnemonicParsing="false" onAction="#onRun" prefHeight="25.0" prefWidth="49.0" text="Run" BorderPane.alignment="CENTER" />
-               </left>
-               <center>
-                  <Button fx:id="stopButton" disable="true" mnemonicParsing="false" onAction="#onStop" prefHeight="25.0" prefWidth="48.0" text="Stop" BorderPane.alignment="CENTER" />
-               </center>
-               <top>
-                  <Separator prefHeight="14.0" prefWidth="195.0" BorderPane.alignment="CENTER" />
-               </top>
-               <right>
-                  <Button fx:id="aboutButton" mnemonicParsing="false" onAction="#onAbout" text="About" BorderPane.alignment="CENTER" />
-               </right>
-               <padding>
-                  <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </BorderPane>
+            <VBox prefHeight="61.0" prefWidth="195.0">
+               <children>
+                  <Separator prefHeight="18.0" prefWidth="195.0" />
+                  <Label prefHeight="15.0" prefWidth="137.0" text="Game controls:">
+                     <VBox.margin>
+                        <Insets left="50.0" />
+                     </VBox.margin></Label>
+                  <BorderPane prefHeight="8.0" prefWidth="195.0">
+                     <right>
+                        <FlowPane prefHeight="35.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="runButton" mnemonicParsing="false" onAction="#onRun" text="Run">
+                                 <opaqueInsets>
+                                    <Insets right="10.0" />
+                                 </opaqueInsets>
+                              </Button>
+                              <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="13.0" />
+                              <Button fx:id="stopButton" mnemonicParsing="false" onAction="#onStop" text="Stop">
+                                 <opaqueInsets>
+                                    <Insets left="10.0" />
+                                 </opaqueInsets>
+                              </Button>
+                           </children>
+                        </FlowPane>
+                     </right>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </BorderPane>
+               </children>
+            </VBox>
          </children>
          <padding>
             <Insets right="10.0" />

@@ -1,7 +1,7 @@
 package gof.gui;
 
 public interface IBoard {
-    int getWitdh();
+    int getWidth();
 
     int getHeight();
 
