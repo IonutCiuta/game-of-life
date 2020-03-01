@@ -142,7 +142,7 @@ public class Board implements IBoard {
     }
 
     @Override
-    public int getWitdh() {
+    public int getWidth() {
         return this.width;
     }
 
