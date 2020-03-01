@@ -18,9 +18,9 @@ public class BoardTest {
         };
         Board b = new Board(cells);
 
-        assertEquals(3, b.neighboursCountAt(0,0));
-        assertEquals(8, b.neighboursCountAt(1,1));
-        assertEquals(5, b.neighboursCountAt(1,0));
+        assertEquals(3, b.countNeighbours(0,0));
+        assertEquals(8, b.countNeighbours(1,1));
+        assertEquals(5, b.countNeighbours(1,0));
     }
 
     @Test
@@ -33,16 +33,16 @@ public class BoardTest {
 
         Board b = new Board(cells);
 
-        assertEquals(true, b.isAlive(0, 0));
-        assertEquals(false, b.isAlive(1, 1));
+        assertEquals(true, b.isCellAlive(0, 0));
+        assertEquals(false, b.isCellAlive(1, 1));
 
         b.update();
 
-        assertEquals(false, b.isAlive(0, 0));
-        assertEquals(false, b.isAlive(2, 2));
-        assertEquals(false, b.isAlive(2, 0));
-        assertEquals(false, b.isAlive(0, 2));
-        assertEquals(false, b.isAlive(1, 1));
+        assertEquals(false, b.isCellAlive(0, 0));
+        assertEquals(false, b.isCellAlive(2, 2));
+        assertEquals(false, b.isCellAlive(2, 0));
+        assertEquals(false, b.isCellAlive(0, 2));
+        assertEquals(false, b.isCellAlive(1, 1));
     }
 
     @Test
@@ -72,12 +72,12 @@ public class BoardTest {
         
         b.update();
         
-        assertEquals(true, b.isAlive(0, 0));
-        assertEquals(true, b.isAlive(0, 2));
-        assertEquals(true, b.isAlive(1, 0));
-        assertEquals(true, b.isAlive(1, 2));
+        assertEquals(true, b.isCellAlive(0, 0));
+        assertEquals(true, b.isCellAlive(0, 2));
+        assertEquals(true, b.isCellAlive(1, 0));
+        assertEquals(true, b.isCellAlive(1, 2));
         
-        assertEquals(false, b.isAlive(0, 1));
-        assertEquals(false, b.isAlive(1, 1));
+        assertEquals(false, b.isCellAlive(0, 1));
+        assertEquals(false, b.isCellAlive(1, 1));
     }
 }

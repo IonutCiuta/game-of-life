@@ -10,12 +10,7 @@ public class Board {
         height = width = grid.length;
     }
 
-    /**
-     * @param height
-     * @param width
-     * @param p probability that Cell is alive at start
-     */
-    public Board(int height, int width, double p) {
+    public Board(int height, int width, double probability) {
         this.height = height;
         this.width = width;
         this.grid = new Cell[height][width];
@@ -25,7 +20,7 @@ public class Board {
 
                 Cell newCell = new Cell();
 
-                if (Math.random() <= p) {
+                if (Math.random() <= probability) {
                     newCell.setNewState(true);
                     newCell.updateState();
                 }
@@ -35,60 +30,65 @@ public class Board {
         }
     }
 
-    public Cell[][] getGrid() {
-        return grid;
-    }
-    
-    public int getSize() {
-        return width;
-    }
-
-    public int neighboursCountAt(int row, int col) {
+    // Neighbour configuration
+    // N N N
+    // N * N
+    // N N N
+    public int countNeighbours(int row, int col) {
         int sum = 0;
-        // Positions numbered as phone dial
-        if (row != 0 && col != 0){    //1
-            if(isAlive(row-1,col-1)){
+
+        // Top left neighbour
+        if (row != 0 && col != 0) {    //1
+            if(isCellAlive(row - 1,col - 1)) {
                 sum++;
             }
         }
-        
+
+        // Top neighbour
         if (row != 0){
-            if(isAlive(row-1,col)){ //2
-            sum++;
-            }
-        }
-        
-        if (row != 0 && col != width-1){//3
-            if(isAlive(row-1,col+1)){
-                sum++;
-            }
-        }
-        if (col != 0){
-            if(isAlive(row,col-1)){ //4
-            sum++;
-            }
-        }
-        //self
-        if (col != width-1){
-            if(isAlive(row,col+1)){ //6
+            if(isCellAlive(row - 1, col)) {
                 sum++;
             }
         }
 
-        if (row != height-1 && col != 0){
-            if(isAlive(row+1,col-1)){ //7
+        // Top right neighbour
+        if (row != 0 && col != width - 1) {
+            if(isCellAlive(row - 1,col + 1)) {
                 sum++;
             }
         }
 
-        if (row != height-1){
-            if(isAlive(row+1,col)){ //8
-            sum++;
+        // Left neighbour
+        if (col != 0) {
+            if(isCellAlive(row,col - 1)) {
+                sum++;
             }
         }
 
-        if (row != height-1 && col != width-1){
-            if(isAlive(row+1,col+1)){ //9
+        // Right neighbour
+        if (col != width - 1) {
+            if(isCellAlive(row,col + 1)) {
+                sum++;
+            }
+        }
+
+        // Bottom left neighbour
+        if (row != height - 1 && col != 0){
+            if(isCellAlive(row + 1,col - 1)) {
+                sum++;
+            }
+        }
+
+        // Bottom neighbour
+        if (row != height - 1){
+            if(isCellAlive(row + 1, col)) {
+                sum++;
+            }
+        }
+
+        // Bottom right neighbour
+        if (row != height - 1 && col != width - 1) {
+            if(isCellAlive(row + 1,col + 1)) {
                 sum++;
             }
         }
@@ -96,8 +96,8 @@ public class Board {
         return sum;
     }
 
-    public boolean isAlive(int row, int col) {
-        return grid[row][col].getState();
+    public boolean isCellAlive(int row, int col) {
+        return this.grid[row][col].getState();
     }
 
     public void update() {
@@ -105,32 +105,42 @@ public class Board {
         commit();
     }
 
-    /**
-     * Assigns new state to individual Cells 
-     * according to GoF rules
-     */
     private void prepare() {
-        for (int h=0; h<grid.length; h++){
-            for (int w=0; w<grid[h].length; w++){
-                int nr = neighboursCountAt(h,w);                
-                if (nr < 2) { grid[h][w].setNewState(false);}  //underpop
-                else if (nr > 3) { grid[h][w].setNewState(false);} //overcrowd
-                else if (nr == 3) { grid[h][w].setNewState(true);} //born
-                else if (nr == 2) { grid[h][w].setNewState(grid[h][w].getState());} // stay same
+        for (int h = 0; h < this.height; h++){
+            for (int w = 0; w < this.width; w++){
+
+                int neighbours = countNeighbours(h, w);
+
+                if (neighbours < 2) {
+                    // Die
+                    this.grid[h][w].setNewState(false);
+                }  else if (neighbours > 3) {
+                    // Die
+                    this.grid[h][w].setNewState(false);
+                } else if (neighbours == 3) {
+                    // Live
+                    this.grid[h][w].setNewState(true);
+                } else if (neighbours == 2) {
+                    // Don't change
+                    this.grid[h][w].setNewState(this.grid[h][w].getState());
+                }
             }
         }
     }
 
-    /**
-     * Updates Cell state based on newState
-     */
     private void commit() {
-        for (int h=0; h<grid.length; h++){
-            for (int w=0; w<grid[h].length; w++){
-                grid[h][w].updateState();
+        for (int h=0; h < this.height; h++){
+            for (int w=0; w < this.width; w++){
+                this.grid[h][w].updateState();
             }
         }
     }
-    
-    
+
+    public Cell[][] getGrid() {
+        return this.grid;
+    }
+
+    public int getSize() {
+        return this.width;
+    }
 }
