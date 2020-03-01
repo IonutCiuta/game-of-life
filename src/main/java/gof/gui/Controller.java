@@ -1,7 +1,9 @@
 package gof.gui;
 
-import gof.implementation.Board;
 import gof.core.IBoard;
+import gof.core.IBoardProvider;
+import gof.implementation.Board;
+import gof.implementation.BoardProvider;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
@@ -40,6 +42,8 @@ public class Controller implements Initializable {
 
     private IBoard board;
 
+    private IBoardProvider boardProvider;
+
     private JavaFXDisplayDriver display;
 
     private Timeline loop = null;
@@ -51,15 +55,18 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // GUI setup
         presetHandler = new PresetHandler();
         AnchorPane anchor = presetHandler.loadPresets(base);
         presetBox.getChildren().add(anchor);
 
         // Setup board
-        this.board = new Board();
-        this.board.setup(DEFAULT_SIZE);
+        // TODO: change this to your provider
+        this.boardProvider = new BoardProvider();
+        this.board = this.boardProvider.getBoard(DEFAULT_SIZE);
+
+        // Initialize GUI
         createDisplay();
-        
         attachResizeListener();
     }
 
