@@ -60,7 +60,6 @@ public class Controller implements Initializable {
         presetBox.getChildren().add(anchor);
 
         // Setup board
-        // TODO: change this to your provider
         this.boardProvider = new BoardProvider();
         this.board = this.boardProvider.getBoard(DEFAULT_SIZE);
 
