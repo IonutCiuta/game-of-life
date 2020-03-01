@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.*?>
-
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
 <HBox fx:id="rootBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gof.gui.Controller">
    <children>
       <FlowPane fx:id="base" prefHeight="475.0" prefWidth="475.0">
@@ -40,46 +38,9 @@
             </TextFlow>
             <VBox prefHeight="275.0" prefWidth="197.0">
                <children>
-                  <VBox prefHeight="27.0" prefWidth="189.0">
-                     <children>
-                        <VBox prefHeight="33.0" prefWidth="195.0">
-                           <children>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Label text="Cell density: ">
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin></Label>
-                                    <Label fx:id="countLabel" text="30%" />
-                                 </children>
-                              </HBox>
-                              <!--
-                              <Slider
-                                      fx:id="countSlider"
-                                      onDragDetected="#onSlide"
-                                      onDragDone="#onSlide"
-                                      onDragDropped="#onSlide"
-                                      onDragEntered="#onSlide"
-                                      onDragExited="#onSlide"
-                                      onDragOver="#onSlide"
-                                      onMouseDragEntered="#onSlide"
-                                      onMouseDragExited="#onSlide"
-                                      onMouseDragOver="#onSlide"
-                                      onMouseDragReleased="#onSlide"
-                                      value="30.0" />
-                              -->
-                           </children>
-                        </VBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets left="5.0" />
-                     </VBox.margin>
-                  </VBox>
-                  <Separator opacity="0.0" prefWidth="200.0" />
                   <VBox prefHeight="118.0" prefWidth="193.0">
                      <children>
-                        <Separator prefHeight="16.0" prefWidth="195.0" />
-                        <Label prefHeight="15.0" prefWidth="102.0" text="Choose preset:">
+                        <Label prefHeight="15.0" prefWidth="102.0" text="Choose board preset:">
                            <opaqueInsets>
                               <Insets top="10.0" />
                            </opaqueInsets>
@@ -93,15 +54,31 @@
                         <Insets left="5.0" />
                      </VBox.margin>
                   </VBox>
+                  <FlowPane prefHeight="35.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="openPresetBtn" mnemonicParsing="false" onAction="#onPresetOpen" text="Open Preset">
+                           <opaqueInsets>
+                              <Insets right="10.0" />
+                           </opaqueInsets>
+                        </Button>
+                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="13.0" />
+                        <Button fx:id="clearButton" mnemonicParsing="false" onAction="#onClear" text="Clear Board">
+                           <opaqueInsets>
+                              <Insets left="10.0" />
+                           </opaqueInsets>
+                        </Button>
+                     </children>
+                  </FlowPane>
                   <Separator opacity="0.0" prefHeight="13.0" prefWidth="195.0">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding></Separator>
-                  <Button fx:id="openPresetBtn" mnemonicParsing="false" onAction="#onPresetOpen" text="Open">
-                     <VBox.margin>
-                        <Insets left="70.0" />
-                     </VBox.margin>
-                  </Button>
+                     </padding>
+                  </Separator>
+                  <BorderPane prefHeight="8.0" prefWidth="195.0">
+                     <right>
+
+                     </right>
+                  </BorderPane>
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -141,25 +118,6 @@
                   </BorderPane>
                </children>
             </VBox>
-            <BorderPane prefHeight="33.0" prefWidth="195.0">
-               <!--
-               <center>
-                  <Button fx:id="randomizeButton" mnemonicParsing="false" onAction="#onRandomize" text="Randomize" BorderPane.alignment="CENTER" />
-               </center>
-               <right>
-                  <Button fx:id="clearButton" mnemonicParsing="false" onAction="#onClear" text="Clear" BorderPane.alignment="CENTER" />
-               </right>
-               -->
-               <top>
-                  <Separator prefWidth="200.0" BorderPane.alignment="CENTER" />
-               </top>
-               <left>
-                  <Label text="Board:" BorderPane.alignment="CENTER" />
-               </left>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </BorderPane>
             <BorderPane prefHeight="39.0" prefWidth="195.0">
                <left>
                 <Button fx:id="runButton" mnemonicParsing="false" onAction="#onRun" prefHeight="25.0" prefWidth="49.0" text="Run" BorderPane.alignment="CENTER" />

@@ -1,11 +1,6 @@
 package gof.gui;
 
 import gof.core.Board;
-
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import gof.core.Cell;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
@@ -18,8 +13,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -32,23 +25,25 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 public class Controller implements Initializable {
     
     private final int    DEFAULT_SIZE = 15;
-    private final double DEFAULT_PROB = 0.3;
 
     @FXML
     private FlowPane base;
-    @FXML
-    private Label countLabel;
-    @FXML
-    private Slider countSlider;
+
     @FXML
     private HBox presetBox;
+
     @FXML
     private Button openButton, saveButton, openPresetBtn;
+
     @FXML
-    private Button runButton, stopButton, randomizeButton, clearButton;
+    private Button runButton, stopButton, clearButton;
+
     @FXML
     private HBox rootBox;
 
@@ -72,6 +67,7 @@ public class Controller implements Initializable {
         // Setup board
         this.board = new Board();
         this.board.setup(DEFAULT_SIZE);
+        createDisplay();
         
         attachResizeListener();
     }
@@ -94,16 +90,12 @@ public class Controller implements Initializable {
         toggleButtons(true);
         loop.stop();
     }
-//
-//    @FXML
-//    private void onClear(Event evt) {
-//        createBoard(DEFAULT_SIZE, 0);
-//    }
-//
-//    @FXML
-//    private void onRandomize(Event evt) {
-//        createBoard(DEFAULT_SIZE, (double) countSlider.getValue()/100);
-//    }
+
+    @FXML
+    private void onClear(Event evt) {
+        this.board.setup(DEFAULT_SIZE);
+        createDisplay();
+    }
     
     @FXML
     private void onPresetOpen(Event evt) {
@@ -165,36 +157,14 @@ public class Controller implements Initializable {
     }
     
     private void toggleButtons(boolean enable) {
-//        countSlider.setDisable(!enable);
         presetBox.setDisable(!enable);
         openButton.setDisable(!enable);
         openPresetBtn.setDisable(!enable);
         saveButton.setDisable(!enable);
         runButton.setDisable(!enable);
-//        clearButton.setDisable(!enable);
-//        randomizeButton.setDisable(!enable);
-
+        clearButton.setDisable(!enable);
         stopButton.setDisable(enable);
     }
-
-//    // Uncomment to support randomized cells
-//    private void createBoard(int size, double probability) {
-//        board = new Board(new Cell[size][size]);
-//        for (int h = 0; h < size; h++){
-//            for (int w = 0; w < size; w++){
-//
-//                Cell newCell = new Cell();
-//
-//                if (Math.random() <= probability) {
-//                    newCell.setNewState(true);
-//                    newCell.updateState();
-//                }
-//
-//                board.getGrid()[h][w] = newCell;
-//            }
-//        }
-//        createDisplay();
-//    }
     
     private void createDisplay() {
         display = new JavaFXDisplayDriver(board.getWitdh(), cellSizePx, board);
