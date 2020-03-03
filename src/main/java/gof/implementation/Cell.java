@@ -13,15 +13,20 @@ public int j;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cell cell = (Cell) o;
-        return i == cell.i &&
-                j == cell.j;
+        Cell otherCell = (Cell) o;
+        return this.i == otherCell.i && this.j == otherCell.j;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(i, j);
+    }
+
+    @Override
+    public String toString() {
+        return "Cell{" +
+                "i=" + i +
+                ", j=" + j +
+                '}';
     }
 }

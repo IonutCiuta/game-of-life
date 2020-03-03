@@ -54,6 +54,9 @@ public class Game implements IBoard {
 
         aliveCells.removeAll(cellsToBeRemoved);
         aliveCells.addAll(cellsToBeRessurected);
+
+        cellsToBeRemoved.clear();
+        cellsToBeRessurected.clear();
     }
 
     public void CalculateCellsToBeRemoved()
@@ -63,8 +66,16 @@ public class Game implements IBoard {
             int n = GetNumberOfAliveNeighbours(cell);
             if(n < 2 || n > 3)
             {
-                cellsToBeRemoved.add(cell);
+                MarkCellToBeRemoved(cell);
+
             }
+        }
+    }
+
+    private void MarkCellToBeRemoved(Cell cell) {
+        if(!cellsToBeRemoved.contains(cell))
+        {
+            cellsToBeRemoved.add(cell);
         }
     }
 
@@ -76,9 +87,15 @@ public class Game implements IBoard {
             {
                 if(GetNumberOfAliveNeighbours(neighbour) == 3)
                 {
-                    cellsToBeRessurected.add(neighbour);
+                    MarkCellToBeRessurected(neighbour);
                 }
             }
+        }
+    }
+
+    private void MarkCellToBeRessurected(Cell neighbour) {
+        if (!cellsToBeRessurected.contains(neighbour)) {
+            cellsToBeRessurected.add(neighbour);
         }
     }
 
